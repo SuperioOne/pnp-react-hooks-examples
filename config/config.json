@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "pnp-react-hook-examples-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/pnpReactHookExamples/PnpReactHookExamplesWebPart.js",
+          "manifest": "./src/webparts/pnpReactHookExamples/PnpReactHookExamplesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PnpReactHookExamplesWebPartStrings": "lib/webparts/pnpReactHookExamples/loc/{locale}.js"
+  }
+}
