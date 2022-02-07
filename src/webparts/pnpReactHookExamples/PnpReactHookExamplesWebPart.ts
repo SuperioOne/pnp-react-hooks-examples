@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
+import
+{
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
@@ -10,14 +11,27 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'PnpReactHookExamplesWebPartStrings';
 import PnpReactHookExamples from './components/PnpReactHookExamples';
 import { IPnpReactHookExamplesProps } from './components/IPnpReactHookExamplesProps';
+import { sp } from '@pnp/sp';
 
-export interface IPnpReactHookExamplesWebPartProps {
+export interface IPnpReactHookExamplesWebPartProps
+{
   description: string;
 }
 
-export default class PnpReactHookExamplesWebPart extends BaseClientSideWebPart<IPnpReactHookExamplesWebPartProps> {
+export default class PnpReactHookExamplesWebPart extends BaseClientSideWebPart<IPnpReactHookExamplesWebPartProps>
+{
+  protected onInit(): Promise<void>
+  {
+    return super.onInit().then(_ =>
+    {
+      sp.setup({
+        spfxContext: this.context
+      });
+    });
+  }
 
-  public render(): void {
+  public render(): void
+  {
     const element: React.ReactElement<IPnpReactHookExamplesProps> = React.createElement(
       PnpReactHookExamples,
       {
@@ -28,15 +42,18 @@ export default class PnpReactHookExamplesWebPart extends BaseClientSideWebPart<I
     ReactDom.render(element, this.domElement);
   }
 
-  protected onDispose(): void {
+  protected onDispose(): void
+  {
     ReactDom.unmountComponentAtNode(this.domElement);
   }
 
-  protected get dataVersion(): Version {
+  protected get dataVersion(): Version
+  {
     return Version.parse('1.0');
   }
 
-  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration
+  {
     return {
       pages: [
         {
