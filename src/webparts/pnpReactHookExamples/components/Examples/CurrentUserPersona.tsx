@@ -1,28 +1,17 @@
 import * as React from "react";
-import { DefaultButton, IPersonaSharedProps, Persona, PersonaSize, Shimmer, ShimmerElementsGroup, ShimmerElementType } from "@fluentui/react";
-import { useCurrentUser, useProfile, useUser } from "pnp-react-hooks";
+import { IPersonaSharedProps, Persona, PersonaSize, Shimmer, ShimmerElementsGroup, ShimmerElementType } from "@fluentui/react";
+import { useCurrentUser, useProfile } from "pnp-react-hooks";
 
 export function CurrentUserPersona()
 {
-    const [_, setState] = React.useState({});
-
     // get current user login name
     const curUser = useCurrentUser({
         query: {
             select: ["LoginName"]
-        },
+        }
     });
 
-    // disable hook until proper login name
-    const profile = useProfile<IAzureADProfile>(curUser?.LoginName, {
-        disabled: typeof curUser?.LoginName !== "string",
-    });
-
-    const testPro = useUser(profile?.Email, {
-        disabled: typeof profile?.Email !== "string",
-    });
-
-    console.log(testPro);
+    const profile = useProfile<IAzureADProfile>(curUser?.LoginName);
 
     // Create persona information from profile
     const personaInfo: IPersonaSharedProps = React.useMemo(() =>
@@ -45,7 +34,6 @@ export function CurrentUserPersona()
             isDataLoaded={personaInfo !== undefined}
         >
             <Persona {...personaInfo} size={PersonaSize.size40} />
-            <DefaultButton text="test" onClick={() => setState({})} />
         </Shimmer>
     );
 }
