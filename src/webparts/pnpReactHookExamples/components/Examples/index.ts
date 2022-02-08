@@ -1,3 +1,4 @@
+export { BasicSearch } from "./BasicSearch";
+export { BasicUserSearch } from "./BasicUserSearch";
 export { CurrentUserPersona } from "./CurrentUserPersona";
-export { ListInfoInspector } from "./ListInfoInspector";
-export { BasicSearch as BasicSearchExample } from "./BasicSearch";
+export { ListItems } from "./ListItems";

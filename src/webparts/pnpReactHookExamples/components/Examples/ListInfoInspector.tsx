@@ -1,7 +1,10 @@
 import * as React from "react";
-import { DefaultButton, Dropdown, IDropdownOption, Separator, Stack, Text, Toggle } from "@fluentui/react";
+import { DefaultButton, Dropdown, IDropdownOption, mergeStyleSets, Separator, Stack, Text, Toggle } from "@fluentui/react";
 import { useList, useLists, useSubWebInfos } from "pnp-react-hooks";
 import AceEditor from "react-ace";
+
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/theme-monokai";
 
 export function ListInfoInspector()
 {
@@ -97,13 +100,14 @@ export function ListInfoInspector()
                 <Stack.Item >
                     {
                         listInfo && selectedList
-                            ? <>
+                            ? <div className={classNames.responseZone}>
                                 <Text variant="xxLarge" > List Info </Text>
                                 <Separator />
                                 <AceEditor
+                                    width="100%"
                                     placeholder=""
                                     mode="json"
-                                    theme="github"
+                                    theme="monokai"
                                     name="Response Json"
                                     fontSize={16}
                                     showPrintMargin={true}
@@ -117,7 +121,7 @@ export function ListInfoInspector()
                                         showLineNumbers: true,
                                         tabSize: 2,
                                     }} />
-                            </>
+                            </div>
                             : undefined
                     }
                 </Stack.Item>
@@ -126,3 +130,9 @@ export function ListInfoInspector()
 }
 
 const dropdownStyles = { dropdown: { width: 300 } };
+
+const classNames = mergeStyleSets({
+    responseZone: {
+        width: "100%"
+    }
+});

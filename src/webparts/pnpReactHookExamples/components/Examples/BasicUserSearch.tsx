@@ -1,45 +1,24 @@
 import * as React from "react";
-import { ISearchQuery, ISearchResult } from "@pnp/sp/search/types";
-import { Dropdown, getFocusStyle, getTheme, IDropdownOption, ITheme, Link, List, mergeStyleSets, SearchBox, Shimmer, ShimmerElementsGroup, ShimmerElementType, Stack, TextField } from "@fluentui/react";
-import { useSearch } from "pnp-react-hooks";
+import { getFocusStyle, getTheme, ITheme, Link, List, mergeStyleSets, SearchBox, Shimmer, ShimmerElementsGroup, ShimmerElementType, Stack } from "@fluentui/react";
+import { useSearchUser } from "pnp-react-hooks";
+import { IPeoplePickerEntity } from "@pnp/sp/profiles/types";
 
-// example custom disable check function for disabling search when input text is empty. 
-const disableWhen = (searchOptions: string | ISearchQuery) =>
-{
-    if (typeof searchOptions === "string")
-    {
-        return searchOptions.length < 1;
-    }
-    else if (searchOptions?.Querytext)
-    {
-        return searchOptions.Querytext.length < 1;
-    }
-    else
-    {
-        return true;
-    }
-};
-
-const PAGE_SIZE = 10;
-
-export function BasicSearch()
+export function BasicUserSearch()
 {
     const [searchText, setSearchText] = React.useState<string>();
 
-    const [searchResponse, setPage] = useSearch(
+    const users = useSearchUser(
         {
-            Querytext: searchText,
-            RowsPerPage: PAGE_SIZE
-        },
-        {
-            disabled: disableWhen
+            AllowEmailAddresses: true,
+            MaximumEntitySuggestions: 5,
+            QueryString: searchText
         });
 
     return (
         <Stack tokens={{ childrenGap: 20 }}>
             <Stack.Item>
                 <SearchBox
-                    placeholder="Search on SharePoint"
+                    placeholder="Search users"
                     onSearch={setSearchText}
                     onClear={() => setSearchText(undefined)}
                 />
@@ -49,25 +28,13 @@ export function BasicSearch()
                     searchText?.length > 0
                         ? <Shimmer
                             customElementsGroup={getCustomElements}
-                            isDataLoaded={searchResponse !== undefined}
+                            isDataLoaded={users !== undefined}
                         >
                             <Stack tokens={{ childrenGap: 15 }}>
                                 <Stack.Item>
                                     <List
-                                        items={searchResponse?.PrimarySearchResults ?? []}
+                                        items={users ?? []}
                                         onRenderCell={onRenderCell}
-                                    />
-                                </Stack.Item>
-                                <Stack.Item align="end">
-                                    <Dropdown
-                                        options={getPageOptions(searchResponse?.TotalRows, PAGE_SIZE)}
-                                        selectedKey={searchResponse?.CurrentPage}
-                                        placeholder="Set page"
-                                        styles={dropdownStyles}
-                                        onChange={(_, opt) =>
-                                        {
-                                            if (typeof opt.key === "number") setPage(opt.key);
-                                        }}
                                     />
                                 </Stack.Item>
                             </Stack>
@@ -79,25 +46,9 @@ export function BasicSearch()
     );
 }
 
-const getPageOptions = (totalRows: number, pageSize: number) =>
-{
-    const pageCount = Math.ceil(totalRows / pageSize);
-
-    const options: IDropdownOption[] = [];
-
-    for (let index = 1; index <= pageCount; index++)
-        options.push({
-            key: index,
-            text: `Page ${index}`
-        });
-
-    return options;
-};
-
 const theme: ITheme = getTheme();
 const { palette, semanticColors, fonts } = theme;
 
-const dropdownStyles = { dropdown: { width: 100 } };
 const classNames = mergeStyleSets({
     itemCell: [
         getFocusStyle(theme, { inset: -1 }),
@@ -132,17 +83,18 @@ const classNames = mergeStyleSets({
     }
 });
 
-const onRenderCell = (item: ISearchResult, index: number | undefined): JSX.Element =>
+
+const onRenderCell = (item: IPeoplePickerEntity, index: number | undefined): JSX.Element =>
 {
     return (
         <div className={classNames.itemCell} data-is-focusable={true}>
             <div className={classNames.itemContent}>
                 <div className={classNames.itemName}>
-                    <Link href={item.Path} target="_blank">
-                        {item.Title}
+                    <Link href={`mailto:${item.EntityData.Email}`} target="_blank">
+                        {item.DisplayText}
                     </Link>
                 </div>
-                <div className={classNames.itemIndex}>{`View ${item.ViewsLifeTime}`}</div>
+                <div className={classNames.itemIndex}>{`View ${item.EntityData.Department}`}</div>
                 <div>{item.Description}</div>
             </div>
         </div>
@@ -150,6 +102,7 @@ const onRenderCell = (item: ISearchResult, index: number | undefined): JSX.Eleme
 };
 
 const wrapperStyles = { display: 'flex' };
+
 
 const getCustomElements = (): JSX.Element =>
 {

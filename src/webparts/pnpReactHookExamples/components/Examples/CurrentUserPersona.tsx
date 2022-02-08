@@ -11,7 +11,8 @@ export function CurrentUserPersona()
         }
     });
 
-    const profile = useProfile<IAzureADProfile>(curUser?.LoginName);
+    // load profile
+    const profile = useProfile<IUserProfile>(curUser?.LoginName);
 
     // Create persona information from profile
     const personaInfo: IPersonaSharedProps = React.useMemo(() =>
@@ -38,7 +39,7 @@ export function CurrentUserPersona()
     );
 }
 
-interface IAzureADProfile
+interface IUserProfile
 {
     PictureURL: string | null;
     Title: string;
