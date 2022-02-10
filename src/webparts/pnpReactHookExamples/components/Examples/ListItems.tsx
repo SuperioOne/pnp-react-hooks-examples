@@ -49,7 +49,7 @@ export function ListItems()
                 <Dropdown
                     options={listOptions}
                     disabled={!Array.isArray(lists)}
-                    styles={dropdownStyles}
+                    styles={_dropdownStyles}
                     label="Lists"
                     placeholder="Select a list"
                     selectedKey={selectedList?.key}
@@ -59,7 +59,7 @@ export function ListItems()
                     }}
                 />
             </Stack.Item>
-            <Stack.Item styles={stackStyles}>
+            <Stack.Item styles={_stackStyles}>
                 <Slider
                     label="Item Range"
                     lowerValue={sliderLowerValue}
@@ -72,7 +72,7 @@ export function ListItems()
                     value={sliderValue}
                 />
             </Stack.Item>
-            <Stack.Item styles={stackStyles}>
+            <Stack.Item styles={_stackStyles}>
                 <Separator />
             </Stack.Item>
             <Stack.Item>
@@ -144,15 +144,15 @@ export function SPList(props: ISPListProps)
             <Stack.Item>
                 <DetailsList
                     items={items ?? []}
-                    columns={colums}
+                    columns={_colums}
                     layoutMode={DetailsListLayoutMode.justified}
                 />
             </Stack.Item>
         </Stack>);
 }
 
-const stackStyles: Partial<IStackItemStyles> = { root: { maxWidth: 300 } };
-const colums: IColumn[] =
+const _stackStyles: Partial<IStackItemStyles> = { root: { maxWidth: 300 } };
+const _colums: IColumn[] =
     [
         {
             key: "Id",
@@ -199,4 +199,4 @@ const colums: IColumn[] =
         }
     ];
 
-const dropdownStyles = { dropdown: { width: 300 } };
+const _dropdownStyles = { dropdown: { width: 300 } };

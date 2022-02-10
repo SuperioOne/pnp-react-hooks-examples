@@ -2,13 +2,14 @@ import * as React from "react";
 import { Stack, Toggle } from "@fluentui/react";
 import { ListItems } from ".";
 import { PnpHookGlobalOptions, PnpReactOptionProvider } from "pnp-react-hooks";
-
+import { LoadActionOption } from "pnp-react-hooks/types/options/RenderOptions";
 
 export function OptionProvider()
 {
     const [options, setOptions] = React.useState<PnpHookGlobalOptions>({
         disabled: "auto",
         useCache: false,
+        loadActionOption: LoadActionOption.ClearPrevious
     });
 
     return (
@@ -25,7 +26,7 @@ export function OptionProvider()
                         {
                             setOptions((prev) => ({
                                 ...prev,
-                                loadActionOption: checked ? 1 : 0
+                                loadActionOption: checked ? LoadActionOption.KeepPrevious : LoadActionOption.ClearPrevious 
                             }));
                         }}
                     />
