@@ -16,6 +16,7 @@
     "@microsoft/sp-property-pane": "1.13.1",
     "@microsoft/sp-webpart-base": "1.13.1",
     "@pnp/sp": "^2.11.0",
+    "dayjs": "^1.10.7",
     "pnp-react-hooks": "file:../pnp-react-hooks/.temp/bin/pnp-react-hooks-0.0.0.tgz",
     "react": "16.13.1",
     "react-ace": "^9.5.0",

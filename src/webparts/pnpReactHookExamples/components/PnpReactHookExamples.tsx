@@ -26,7 +26,7 @@ const PnpReactHookExamples = (props: IPnpReactHookExamplesProps) =>
             styles={navStyles}
             groups={[{
               links: componentsLinks,
-              name: "Examples",
+              name: "Example Components",
             }]}
           />
         </Stack.Item>
