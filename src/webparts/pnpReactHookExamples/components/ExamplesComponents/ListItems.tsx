@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as dayjs from 'dayjs';
-import { DetailsList, DetailsListLayoutMode, Dropdown, IColumn, IDropdownOption, IStackItemStyles, MessageBar, MessageBarType, Separator, Slider, Stack, Text } from "@fluentui/react";
+import { DetailsListLayoutMode, Dropdown, IColumn, IDropdownOption, IStackItemStyles, MessageBar, MessageBarType, Separator, ShimmeredDetailsList, Slider, Stack, Text } from "@fluentui/react";
 import { useList, useListItems, useLists } from "pnp-react-hooks";
 import { IListInfo } from "@pnp/sp/lists";
 
@@ -142,10 +142,11 @@ export function SPList(props: ISPListProps)
                 <Text variant="small">{list?.Id ?? ""}</Text>
             </Stack.Item>
             <Stack.Item>
-                <DetailsList
+                <ShimmeredDetailsList
                     items={items ?? []}
                     columns={_colums}
                     layoutMode={DetailsListLayoutMode.justified}
+                    enableShimmer={props.list && !Array.isArray(items)}
                 />
             </Stack.Item>
         </Stack>);

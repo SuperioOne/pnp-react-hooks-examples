@@ -1,4 +1,4 @@
-import * as ExampleComponent from "./Examples";
+import * as ExampleComponents from "./ExamplesComponents";
 import * as React from 'react';
 import { IPnpReactHookExamplesProps } from './IPnpReactHookExamplesProps';
 import { LoadActionOption } from 'pnp-react-hooks/types/options/RenderOptions';
@@ -46,12 +46,12 @@ export default PnpReactHookExamples;
 
 const getComponentNavLinks = (setter: (key: string, Component: any) => void): INavLink[] =>
 {
-  return Object.keys(ExampleComponent)
+  return Object.keys(ExampleComponents)
     .sort()
     .map(e => ({
       name: e,
       key: e,
-      onClick: () => setter(e, ExampleComponent[e]),
+      onClick: () => setter(e, ExampleComponents[e]),
       url: ""
     }));
 };
