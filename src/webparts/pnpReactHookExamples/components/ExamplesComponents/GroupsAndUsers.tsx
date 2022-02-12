@@ -1,7 +1,9 @@
-import { DetailsListLayoutMode, IColumn, INavLink, INavStyles, Nav, ShimmeredDetailsList, Stack, Text } from "@fluentui/react";
-import { ISiteGroupInfo } from "@pnp/sp/site-groups/types";
-import { useGroups, useGroupUsers } from "pnp-react-hooks";
 import * as React from "react";
+import { DetailsListLayoutMode, getTheme, IColumn, INavLink, INavStyles, Nav, ShimmeredDetailsList, Stack, Text } from "@fluentui/react";
+import { ISiteGroupInfo } from "@pnp/sp/site-groups/types";
+import { useGroups, useGroupUsers, useIsMemberOf } from "pnp-react-hooks";
+
+const theme = getTheme();
 
 export function GroupsAndUsers()
 {
@@ -9,7 +11,7 @@ export function GroupsAndUsers()
 
     const groups = useGroups({
         query: {
-            select: ["Title", "Id", "Description"],
+            select: ["*", "Title", "Id", "Description"],
             orderBy: "Title",
             orderyByAscending: true,
             filter: "IsHiddenInUI eq false and OwnerTitle ne 'System Account'"
@@ -28,12 +30,14 @@ export function GroupsAndUsers()
 
     const users = useGroupUsers(selectedGroup?.Id, {
         query: {
-            select: ["Id", "Email", "LoginName", "Title"],
+            select: ["*", "Id", "Email", "LoginName", "Title"],
             top: 100,
             orderBy: "Title",
             orderyByAscending: true
         }
     });
+
+    const [amIMemberOf, memberInfo] = useIsMemberOf(selectedGroup?.Id);
 
     return (
         <Stack horizontal verticalAlign="start" tokens={{ childrenGap: 15 }}>
@@ -53,7 +57,16 @@ export function GroupsAndUsers()
                         <Text variant="xLargePlus">{selectedGroup?.Title}</Text>
                     </Stack.Item>
                     <Stack.Item>
-                        <Text variant="medium">{selectedGroup?.Description}</Text>
+                        <Text variant="small">{selectedGroup?.Description}</Text>
+                    </Stack.Item>
+                    <Stack.Item>
+                        <Text variant="mediumPlus" style={{ color: theme.semanticColors.warningIcon }}>
+                            {
+                                amIMemberOf === true ? `You are a member of '${selectedGroup.Title}'.`
+                                    : amIMemberOf === false ? `You are not a member of '${selectedGroup.Title}'.`
+                                        : ""
+                            }
+                        </Text>
                     </Stack.Item>
                     <Stack.Item>
                         {selectedGroup

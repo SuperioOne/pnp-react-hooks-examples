@@ -2,7 +2,7 @@ import * as React from "react";
 import * as dayjs from 'dayjs';
 import { DetailsListLayoutMode, Dropdown, IColumn, IDropdownOption, IStackItemStyles, MessageBar, MessageBarType, Separator, ShimmeredDetailsList, Slider, Stack, Text } from "@fluentui/react";
 import { useList, useListItems, useLists } from "pnp-react-hooks";
-import { IListInfo } from "@pnp/sp/lists";
+import { IListInfo } from "@pnp/sp/lists/types";
 
 export function ListItems()
 {
