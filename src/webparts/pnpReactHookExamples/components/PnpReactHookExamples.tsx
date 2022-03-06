@@ -1,15 +1,17 @@
-import * as ExampleComponents from "./ExamplesComponents";
+// import * as ExampleComponents from "./ExamplesComponents";
 import * as React from 'react';
 import { IPnpReactHookExamplesProps } from './IPnpReactHookExamplesProps';
-import { LoadActionOption } from 'pnp-react-hooks/types/options/RenderOptions';
-import { PnpHookGlobalOptions, PnpReactOptionProvider } from "pnp-react-hooks";
+// import { LoadActionOption } from 'pnp-react-hooks/types/options/RenderOptions';
+// import { PnpHookGlobalOptions, PnpReactOptionProvider } from "pnp-react-hooks";
 import { Stack, Nav, INavStyles, INavLink } from '@fluentui/react';
 
-const reactHooksOptions: PnpHookGlobalOptions = {
-  disabled: "auto",
-  loadActionOption: LoadActionOption.ClearPrevious,
-  exception: console.debug
-};
+const ExampleComponents = {};
+
+// const reactHooksOptions: PnpHookGlobalOptions = {
+//   disabled: "auto",
+//   loadActionOption: LoadActionOption.ClearPrevious,
+//   exception: console.debug
+// };
 
 const PnpReactHookExamples = (props: IPnpReactHookExamplesProps) =>
 {
@@ -18,7 +20,6 @@ const PnpReactHookExamples = (props: IPnpReactHookExamplesProps) =>
   const ExampleComponentType = selectedExample?.component;
 
   return (
-    <PnpReactOptionProvider value={reactHooksOptions}>
       <Stack horizontal verticalAlign="start" tokens={{ childrenGap: 15 }}>
         <Stack.Item>
           <Nav
@@ -38,7 +39,6 @@ const PnpReactHookExamples = (props: IPnpReactHookExamplesProps) =>
           }
         </Stack.Item>
       </Stack>
-    </PnpReactOptionProvider>
   );
 };
 

@@ -11,7 +11,8 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'PnpReactHookExamplesWebPartStrings';
 import PnpReactHookExamples from './components/PnpReactHookExamples';
 import { IPnpReactHookExamplesProps } from './components/IPnpReactHookExamplesProps';
-import { sp } from '@pnp/sp';
+import { spfi, SPFx } from '@pnp/sp';
+import "@pnp/sp/search";
 
 export interface IPnpReactHookExamplesWebPartProps
 {
@@ -22,11 +23,18 @@ export default class PnpReactHookExamplesWebPart extends BaseClientSideWebPart<I
 {
   protected onInit(): Promise<void>
   {
-    return super.onInit().then(_ =>
+    return super.onInit().then(async (_) =>
     {
-      sp.setup({
-        spfxContext: this.context
-      });
+      const sp = spfi().using(SPFx(this.context));
+
+      const data = await sp.search("test");
+      
+      console.debug(data);
+
+      const page  =await data.getPage(2);
+
+      console.debug(page);
+
     });
   }
 
