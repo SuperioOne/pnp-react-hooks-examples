@@ -32,7 +32,7 @@ export function ListItems()
         rangeRef.current = setTimeout(() =>
         {
             setRange(newRange);
-            
+
             if (rangeRef.current > 0)
                 clearTimeout(rangeRef.current);
         }, 1000);
@@ -104,7 +104,7 @@ export function SPList(props: ISPListProps)
             skip: props.skip,
             top: props.top,
         },
-        exception: setError
+        error: setError
     });
 
     const list = useList(props.list, {

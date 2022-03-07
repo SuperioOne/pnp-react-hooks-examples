@@ -7,34 +7,36 @@ import
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
 import * as strings from 'PnpReactHookExamplesWebPartStrings';
 import PnpReactHookExamples from './components/PnpReactHookExamples';
 import { IPnpReactHookExamplesProps } from './components/IPnpReactHookExamplesProps';
-import { spfi, SPFx } from '@pnp/sp';
-import "@pnp/sp/search";
+import { PnpHookGlobalOptions } from 'pnp-react-hooks';
+import { spfi, SPFx} from '@pnp/sp';
 
 export interface IPnpReactHookExamplesWebPartProps
 {
   description: string;
 }
 
+
+
 export default class PnpReactHookExamplesWebPart extends BaseClientSideWebPart<IPnpReactHookExamplesWebPartProps>
 {
+
+  private _hookOptions: PnpHookGlobalOptions;
+
   protected onInit(): Promise<void>
   {
     return super.onInit().then(async (_) =>
     {
       const sp = spfi().using(SPFx(this.context));
 
-      const data = await sp.search("test");
-      
-      console.debug(data);
-
-      const page  =await data.getPage(2);
-
-      console.debug(page);
-
+      this._hookOptions = {
+        disabled: "auto",
+        keepPreviousState: false,
+        error: console.error,
+        sp: sp
+      };
     });
   }
 
@@ -43,7 +45,8 @@ export default class PnpReactHookExamplesWebPart extends BaseClientSideWebPart<I
     const element: React.ReactElement<IPnpReactHookExamplesProps> = React.createElement(
       PnpReactHookExamples,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        options: this._hookOptions
       }
     );
 

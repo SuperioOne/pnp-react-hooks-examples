@@ -2,6 +2,7 @@ import * as React from "react";
 import * as dayjs from "dayjs";
 import * as relativeTime from 'dayjs/plugin/relativeTime';
 import AceEditor from "react-ace";
+import { Caching } from "@pnp/queryable";
 import { Dropdown, IDropdownOption, Separator, Shimmer, Stack, Text } from "@fluentui/react";
 import { IFileInfo } from "@pnp/sp/files";
 import { useFile, useFiles, useFolders } from "pnp-react-hooks";
@@ -20,7 +21,7 @@ export function JsonFileData()
             top: 1,
             select: ["UniqueId"]
         },
-        useCache: true
+        behaviors: [Caching()]
     });
 
     const assetFolder = React.useMemo(() =>

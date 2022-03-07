@@ -1,32 +1,36 @@
 import * as React from "react";
 import { Stack, Toggle } from "@fluentui/react";
 import { ListItems } from ".";
-import { PnpHookGlobalOptions, PnpReactOptionProvider } from "pnp-react-hooks";
-import { LoadActionOption } from "pnp-react-hooks/types/options/RenderOptions";
+import { PnpHookGlobalOptions, PnpHookOptionProvider, usePnpHookOptions } from "pnp-react-hooks";
+import { Caching } from "@pnp/queryable";
+import { spfi } from "@pnp/sp";
 
 export function OptionProvider()
 {
+    const context = usePnpHookOptions();
+
+    const [cache, setCache] = React.useState<boolean>(false);
     const [options, setOptions] = React.useState<PnpHookGlobalOptions>({
+        ...context,
         disabled: "auto",
-        useCache: false,
-        loadActionOption: LoadActionOption.ClearPrevious
+        keepPreviousState: false
     });
 
     return (
-        <PnpReactOptionProvider value={options} >
+        <PnpHookOptionProvider value={options} >
             <Stack tokens={{ childrenGap: 10 }}>
                 <Stack.Item>
                     <Toggle
                         label="Render Mode"
                         onText="Keep Previous"
                         offText="Clear Previous"
-                        checked={options?.loadActionOption === 1}
+                        checked={options?.keepPreviousState}
                         defaultChecked={false}
                         onChange={(_, checked) =>
                         {
                             setOptions((prev) => ({
                                 ...prev,
-                                loadActionOption: checked ? LoadActionOption.KeepPrevious : LoadActionOption.ClearPrevious 
+                                keepPreviousState: checked
                             }));
                         }}
                     />
@@ -36,13 +40,14 @@ export function OptionProvider()
                         label="Enable Cache"
                         onText="Yes"
                         offText="No"
-                        checked={options?.useCache}
+                        checked={cache}
                         defaultChecked={false}
                         onChange={(_, checked) =>
                         {
+                            setCache(checked);
                             setOptions((prev) => ({
                                 ...prev,
-                                useCache: checked
+                                sp: checked ? spfi(context.sp).using(Caching()) : context.sp
                             }));
                         }}
                     />
@@ -67,6 +72,6 @@ export function OptionProvider()
                     <ListItems />
                 </Stack.Item>
             </Stack>
-        </PnpReactOptionProvider>
+        </PnpHookOptionProvider>
     );
 }

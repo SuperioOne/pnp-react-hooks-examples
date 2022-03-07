@@ -1,6 +1,6 @@
-import { DefaultButton, MessageBar, MessageBarType, Stack, Text } from "@fluentui/react";
-import { useSite } from "pnp-react-hooks";
 import * as React from "react";
+import { DefaultButton, MessageBar, MessageBarType, Stack, Text } from "@fluentui/react";
+import { useList } from "pnp-react-hooks";
 
 interface ErrorDetails
 {
@@ -24,15 +24,14 @@ export function ErrorHandling()
         });
     };
 
-    useSite({
-        exception: errorHandler,
-        siteBaseUrl: "non site url string"
+    useList("non existing list", {
+        error: errorHandler,
     }, [refresh]);
 
     return (
         <Stack tokens={{ childrenGap: 25 }}>
             <Stack.Item>
-                <Text variant="medium"> This example tries to get site information with invalid URL configuration. </Text>
+                <Text variant="medium"> This example tries to get site with invalid URL configuration. </Text>
             </Stack.Item>
             <Stack.Item>
                 <DefaultButton

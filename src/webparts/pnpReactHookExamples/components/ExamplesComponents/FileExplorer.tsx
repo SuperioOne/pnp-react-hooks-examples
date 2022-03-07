@@ -1,6 +1,6 @@
 import * as React from "react";
 import { CommandBar, IColumn, ICommandBarItemProps, Icon, IconButton, Link, SearchBox, ShimmeredDetailsList, Stack, Text, Toggle } from "@fluentui/react";
-import { LoadActionMode, useFolderTree, useWebInfo } from "pnp-react-hooks";
+import { useFolderTree, useWebInfo } from "pnp-react-hooks";
 import * as dayjs from "dayjs";
 
 interface IExplorerItem
@@ -55,7 +55,7 @@ export function FileExplorer()
 
     const webInfo = useWebInfo();
     const treeContext = useFolderTree(webInfo?.ServerRelativeUrl, {
-        loadActionOption: LoadActionMode.ClearPrevious,
+        keepPreviousState: false,
         fileQuery: {
             select: ["Name", "Length", "ServerRelativeUrl", "TimeCreated", "TimeLastModified", "UIVersionLabel"],
             filter: filter
