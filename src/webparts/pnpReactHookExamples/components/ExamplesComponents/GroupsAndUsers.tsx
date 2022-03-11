@@ -81,8 +81,7 @@ export function GroupsAndUsers()
                     </Stack.Item>
                 </Stack>
             </Stack.Item>
-        </Stack>
-    );
+        </Stack>);
 }
 
 const navStyles: Partial<INavStyles> = {

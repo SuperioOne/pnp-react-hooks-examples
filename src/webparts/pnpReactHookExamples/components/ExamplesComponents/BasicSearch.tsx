@@ -3,7 +3,7 @@ import { ISearchQuery, ISearchResult } from "@pnp/sp/search/types";
 import { Dropdown, getFocusStyle, getTheme, IDropdownOption, ITheme, Link, List, mergeStyleSets, SearchBox, Shimmer, ShimmerElementsGroup, ShimmerElementType, Stack, TextField } from "@fluentui/react";
 import { useSearch } from "pnp-react-hooks";
 
-// example custom disable check function for disabling search when input text is empty. 
+// example custom disable check function for disabling search when input text is empty.
 const disableWhen = (searchOptions: string | ISearchQuery) =>
 {
     if (typeof searchOptions === "string")

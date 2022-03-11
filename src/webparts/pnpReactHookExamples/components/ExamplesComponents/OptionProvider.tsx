@@ -72,6 +72,5 @@ export function OptionProvider()
                     <ListItems />
                 </Stack.Item>
             </Stack>
-        </PnpHookOptionProvider>
-    );
+        </PnpHookOptionProvider>);
 }

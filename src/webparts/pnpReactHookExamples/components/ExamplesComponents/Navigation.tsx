@@ -8,14 +8,14 @@ export function Navigation()
     return (
         <Stack tokens={{ childrenGap: 15 }}>
             <Stack.Item>
-                <Text variant="xLargePlus">Quicklaunch Navigaton</Text>
+                <Text variant="xLargePlus">Quicklaunch Navigation</Text>
                 <Separator />
             </Stack.Item>
             <Stack.Item>
                 <QuickLaunch />
             </Stack.Item>
             <Stack.Item>
-                <Text variant="xLargePlus"> Navigaton</Text>
+                <Text variant="xLargePlus"> Navigation</Text>
                 <Separator />
             </Stack.Item>
             <Stack.Item>

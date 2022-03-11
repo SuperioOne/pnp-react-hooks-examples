@@ -103,7 +103,6 @@ const onRenderCell = (item: IPeoplePickerEntity, index: number | undefined): JSX
 
 const wrapperStyles = { display: 'flex' };
 
-
 const getCustomElements = (): JSX.Element =>
 {
     return (
