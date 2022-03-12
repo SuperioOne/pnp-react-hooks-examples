@@ -57,8 +57,8 @@ export function JsonFileData()
                     options={fileOptions}
                     disabled={!Array.isArray(fileOptions)}
                     styles={_dropdownStyles}
-                    label="Lists"
-                    placeholder="Select a list"
+                    label="Files"
+                    placeholder="Select a Json file"
                     selectedKey={selectedFile}
                     onChange={(_, opt) =>
                     {

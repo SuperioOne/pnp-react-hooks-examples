@@ -42,7 +42,6 @@ function TopNav()
 
     }, [topNav]);
 
-
     return (
         <Shimmer isDataLoaded={menuItems !== undefined} >
             <CommandBar

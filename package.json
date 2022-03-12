@@ -1,6 +1,6 @@
 {
   "name": "pnp-react-hooks-examples",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "main": "lib/index.js",
   "scripts": {
@@ -9,16 +9,16 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "@fluentui/react": "^8.52.3",
+    "@fluentui/react": "^8.60.4",
     "@microsoft/rush-stack-compiler-4.2": "^0.1.1",
     "@microsoft/sp-core-library": "1.14.0",
     "@microsoft/sp-lodash-subset": "1.14.0",
     "@microsoft/sp-office-ui-fabric-core": "1.14.0",
     "@microsoft/sp-property-pane": "1.14.0",
     "@microsoft/sp-webpart-base": "1.14.0",
-    "@pnp/sp": "^3.0.3",
-    "dayjs": "^1.10.7",
-    "pnp-react-hooks": "^1.0.0",
+    "@pnp/sp": "^3.1.0",
+    "dayjs": "^1.10.8",
+    "pnp-react-hooks": "^1.0.1",
     "react": "16.13.1",
     "react-ace": "^9.5.0",
     "react-dom": "16.13.1"
@@ -26,8 +26,8 @@
   "devDependencies": {
     "@microsoft/rush-stack-compiler-3.9": "0.4.47",
     "@microsoft/sp-build-web": "^1.14.0",
-    "@microsoft/sp-module-interfaces": "1.13.1",
-    "@microsoft/sp-tslint-rules": "1.13.1",
+    "@microsoft/sp-module-interfaces": "^1.14.0",
+    "@microsoft/sp-tslint-rules": "^1.14.0",
     "@types/react": "16.9.51",
     "@types/react-dom": "16.9.8",
     "@types/webpack-env": "1.13.1",
