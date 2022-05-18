@@ -1,6 +1,6 @@
 {
   "name": "pnp-react-hooks-examples",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "main": "lib/index.js",
   "scripts": {
@@ -10,21 +10,20 @@
   },
   "dependencies": {
     "@fluentui/react": "^8.60.4",
-    "@microsoft/rush-stack-compiler-4.2": "^0.1.1",
     "@microsoft/sp-core-library": "1.14.0",
     "@microsoft/sp-lodash-subset": "1.14.0",
     "@microsoft/sp-office-ui-fabric-core": "1.14.0",
     "@microsoft/sp-property-pane": "1.14.0",
     "@microsoft/sp-webpart-base": "1.14.0",
-    "@pnp/sp": "^3.1.0",
+    "@pnp/sp": "^3.3.2",
     "dayjs": "^1.10.8",
-    "pnp-react-hooks": "^1.0.1",
+    "pnp-react-hooks": "^1.1.0",
     "react": "16.13.1",
     "react-ace": "^9.5.0",
     "react-dom": "16.13.1"
   },
   "devDependencies": {
-    "@microsoft/rush-stack-compiler-3.9": "0.4.47",
+    "@microsoft/rush-stack-compiler-4.2": "^0.1.1",
     "@microsoft/sp-build-web": "^1.14.0",
     "@microsoft/sp-module-interfaces": "^1.14.0",
     "@microsoft/sp-tslint-rules": "^1.14.0",
@@ -32,6 +31,7 @@
     "@types/react-dom": "16.9.8",
     "@types/webpack-env": "1.13.1",
     "ajv": "~5.2.2",
-    "gulp": "~4.0.2"
+    "gulp": "~4.0.2",
+    "webpack-bundle-analyzer": "^4.5.0"
   }
 }

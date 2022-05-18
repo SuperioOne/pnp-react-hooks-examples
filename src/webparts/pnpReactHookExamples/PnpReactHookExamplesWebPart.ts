@@ -11,7 +11,9 @@ import * as strings from 'PnpReactHookExamplesWebPartStrings';
 import PnpReactHookExamples from './components/PnpReactHookExamples';
 import { IPnpReactHookExamplesProps } from './components/IPnpReactHookExamplesProps';
 import { PnpHookGlobalOptions } from 'pnp-react-hooks';
-import { spfi, SPFx} from '@pnp/sp';
+import { spfi, SPFx } from '@pnp/sp';
+
+import { FetchWithAbort } from "pnp-react-hooks/behaviors";
 
 export interface IPnpReactHookExamplesWebPartProps
 {
@@ -29,7 +31,7 @@ export default class PnpReactHookExamplesWebPart extends BaseClientSideWebPart<I
   {
     return super.onInit().then(async (_) =>
     {
-      const sp = spfi().using(SPFx(this.context));
+      const sp = spfi().using(SPFx(this.context), FetchWithAbort());
 
       this._hookOptions = {
         disabled: "auto",
