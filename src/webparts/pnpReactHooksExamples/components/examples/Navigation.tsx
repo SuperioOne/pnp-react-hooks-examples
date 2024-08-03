@@ -3,8 +3,7 @@ import { INavNodeInfo } from "@pnp/sp/navigation";
 import { useNavigation } from "pnp-react-hooks";
 import * as React from "react";
 
-export function Navigation()
-{
+export default function Navigation(): JSX.Element {
     return (
         <Stack tokens={{ childrenGap: 15 }}>
             <Stack.Item>
@@ -25,20 +24,18 @@ export function Navigation()
     );
 }
 
-function TopNav()
-{
+function TopNav(): JSX.Element {
     const topNav = useNavigation({
         type: "topNavigation"
     });
 
-    const menuItems: ICommandBarItemProps[] = React.useMemo(() =>
-    {
+    const menuItems: ICommandBarItemProps[] = React.useMemo(() => {
         return topNav?.map((e): ICommandBarItemProps =>
         ({
             key: e.Id.toString(),
             text: e.Title,
             href: e.Url
-        }));
+        })) ?? [];
 
     }, [topNav]);
 
@@ -53,8 +50,7 @@ function TopNav()
     );
 }
 
-function QuickLaunch()
-{
+function QuickLaunch(): JSX.Element {
     const quickLaunch = useNavigation({
         type: "quickLaunch",
         query: {
@@ -62,14 +58,13 @@ function QuickLaunch()
         }
     }) as INavNodeWithChild[];
 
-    const menuItems = React.useMemo(() =>
-    {
+    const menuItems = React.useMemo(() => {
         return [
             {
                 links: quickLaunch?.map((e): INavLink =>
                 ({
                     name: e.Title,
-                    links: _getLinks(e),
+                    links: getLinks(e),
                     url: e.Url
                 }))
             }
@@ -86,22 +81,18 @@ function QuickLaunch()
     );
 }
 
-interface INavNodeWithChild extends INavNodeInfo
-{
+interface INavNodeWithChild extends INavNodeInfo {
     Children?: INavNodeWithChild[];
 }
 
-function _getLinks(node: INavNodeWithChild): INavLink[]
-{
-    if (node?.Children)
-    {
+function getLinks(node: INavNodeWithChild): INavLink[] {
+    if (node?.Children) {
         return node.Children.map(e => ({
             name: e.Title,
             url: e.Url
         }));
     }
-    else
-    {
-        return undefined;
+    else {
+        return [];
     }
 }

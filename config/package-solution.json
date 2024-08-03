@@ -2,17 +2,37 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
     "name": "pnp-react-hooks-examples-client-side-solution",
-    "id": "c7f4f772-6556-4b9f-8086-b3c62b22e0e1",
+    "id": "4928699d-c940-41d0-91a7-21f1585b3833",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
       "name": "",
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.13.1"
-    }
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "pnp-react-hooks-examples description"
+      },
+      "longDescription": {
+        "default": "pnp-react-hooks-examples description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "pnp-react-hooks-examples Feature",
+        "description": "The feature that activates elements of the pnp-react-hooks-examples solution.",
+        "id": "7efae445-6539-4e5b-aa1e-ed5843d049bb",
+        "version": "1.0.0.0"
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/pnp-react-hooks-examples.sppkg"

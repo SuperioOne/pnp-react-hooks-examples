@@ -1,14 +1,12 @@
 import * as React from "react";
 import { Stack, Toggle } from "@fluentui/react";
-import { ListItems } from ".";
+import ListItems from "./ListItems";
 import { PnpHookGlobalOptions, PnpHookOptionProvider, usePnpHookOptions } from "pnp-react-hooks";
 import { Caching } from "@pnp/queryable";
 import { spfi } from "@pnp/sp";
 
-export function OptionProvider()
-{
+export default function OptionProvider(): JSX.Element {
     const context = usePnpHookOptions();
-
     const [cache, setCache] = React.useState<boolean>(false);
     const [options, setOptions] = React.useState<PnpHookGlobalOptions>({
         ...context,
@@ -26,8 +24,7 @@ export function OptionProvider()
                         offText="Clear Previous"
                         checked={options?.keepPreviousState}
                         defaultChecked={false}
-                        onChange={(_, checked) =>
-                        {
+                        onChange={(_, checked) => {
                             setOptions((prev) => ({
                                 ...prev,
                                 keepPreviousState: checked
@@ -42,9 +39,8 @@ export function OptionProvider()
                         offText="No"
                         checked={cache}
                         defaultChecked={false}
-                        onChange={(_, checked) =>
-                        {
-                            setCache(checked);
+                        onChange={(_, checked) => {
+                            setCache(!!checked);
                             setOptions((prev) => ({
                                 ...prev,
                                 sp: checked ? spfi(context.sp).using(Caching()) : context.sp
@@ -59,8 +55,7 @@ export function OptionProvider()
                         offText="Auto"
                         checked={options?.disabled === true}
                         defaultChecked={false}
-                        onChange={(_, checked) =>
-                        {
+                        onChange={(_, checked) => {
                             setOptions((prev) => ({
                                 ...prev,
                                 disabled: checked ? true : "auto"

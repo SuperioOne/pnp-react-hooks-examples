@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "pnp-react-hook-examples-web-part": {
+    "pnp-react-hooks-examples-web-part": {
       "components": [
         {
-          "entrypoint": "./lib/webparts/pnpReactHookExamples/PnpReactHookExamplesWebPart.js",
-          "manifest": "./src/webparts/pnpReactHookExamples/PnpReactHookExamplesWebPart.manifest.json"
+          "entrypoint": "./lib/webparts/pnpReactHooksExamples/PnpReactHooksExamplesWebPart.js",
+          "manifest": "./src/webparts/pnpReactHooksExamples/PnpReactHooksExamplesWebPart.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "PnpReactHookExamplesWebPartStrings": "lib/webparts/pnpReactHookExamples/loc/{locale}.js"
+    "PnpReactHooksExamplesWebPartStrings": "lib/webparts/pnpReactHooksExamples/loc/{locale}.js"
   }
 }

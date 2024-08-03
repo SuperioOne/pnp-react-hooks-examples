@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as React from "react";
 import * as dayjs from "dayjs";
 import * as relativeTime from 'dayjs/plugin/relativeTime';
@@ -10,11 +11,10 @@ import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
 
 dayjs.extend(relativeTime);
+const DROPDOWN_STYLES = { dropdown: { width: 300 } };
 
-export function JsonFileData()
-{
-    const [selectedFile, setSelectedFile] = React.useState<string>();
-
+export default function JsonFileData(): JSX.Element {
+    const [selectedFile, setSelectedFile] = React.useState<string>("");
     const folders = useFolders({
         query: {
             filter: "Name eq 'SiteAssets'",
@@ -24,14 +24,13 @@ export function JsonFileData()
         behaviors: [Caching()]
     });
 
-    const assetFolder = React.useMemo(() =>
-    {
+    const assetFolder = React.useMemo(() => {
         return folders?.length === 1
             ? folders[0].UniqueId
             : undefined;
     }, [folders]);
 
-    const files = useFiles(assetFolder, {
+    const files = useFiles(assetFolder!, {
         query: {
             filter: "substringof('.json', Name)",
             top: 500,
@@ -45,9 +44,8 @@ export function JsonFileData()
         type: "text"
     });
 
-    const fileOptions: IDropdownOption<IFileInfo>[] = React.useMemo(() =>
-    {
-        return files?.map(e => ({ key: e.UniqueId, text: e.Name, data: e }));
+    const fileOptions: IDropdownOption<IFileInfo>[] = React.useMemo(() => {
+        return files?.map(e => ({ key: e.UniqueId, text: e.Name, data: e })) ?? [];
     }, [files]);
 
     return (
@@ -56,12 +54,11 @@ export function JsonFileData()
                 <Dropdown
                     options={fileOptions}
                     disabled={!Array.isArray(fileOptions)}
-                    styles={_dropdownStyles}
+                    styles={DROPDOWN_STYLES}
                     label="Files"
                     placeholder="Select a Json file"
                     selectedKey={selectedFile}
-                    onChange={(_, opt) =>
-                    {
+                    onChange={(_, opt) => {
                         setSelectedFile(opt?.key as string);
                     }}
                 />
@@ -69,7 +66,7 @@ export function JsonFileData()
             <Stack.Item>
                 {
                     selectedFile
-                        ? <Shimmer isDataLoaded={fileInfo && fileContentAsText !== undefined}>
+                        ? <Shimmer isDataLoaded={!!fileInfo && !!fileContentAsText}>
                             <Stack tokens={{ childrenGap: 7 }}>
                                 <Stack.Item>
                                     <Text variant="xxLargePlus">{fileInfo?.Name}</Text>
@@ -94,7 +91,7 @@ export function JsonFileData()
                                         showPrintMargin={true}
                                         showGutter={true}
                                         highlightActiveLine={true}
-                                        value={fileContentAsText}
+                                        value={fileContentAsText ?? undefined}
                                         setOptions={{
                                             enableBasicAutocompletion: false,
                                             enableLiveAutocompletion: false,
@@ -111,4 +108,3 @@ export function JsonFileData()
         </Stack >);
 }
 
-const _dropdownStyles = { dropdown: { width: 300 } };

@@ -2,21 +2,17 @@ import * as React from "react";
 import { DefaultButton, MessageBar, MessageBarType, Stack, Text } from "@fluentui/react";
 import { useList } from "pnp-react-hooks";
 
-interface ErrorDetails
-{
+interface ErrorDetails {
     errorObj: Error;
     count: number;
 }
 
-export function ErrorHandling()
-{
+export default function ErrorHandling(): JSX.Element {
     const [error, setError] = React.useState<ErrorDetails>();
     const [refresh, setRefresh] = React.useState({});
 
-    const errorHandler = (err: Error) =>
-    {
-        setError((previous) =>
-        {
+    const errorHandler = (err: Error): void => {
+        setError((previous) => {
             return {
                 count: (previous?.count ?? 0) + 1,
                 errorObj: err,

@@ -2,11 +2,19 @@
   "@microsoft/generator-sharepoint": {
     "plusBeta": false,
     "isCreatingSolution": true,
-    "environment": "spo",
-    "version": "1.13.1",
+    "nodeVersion": "18.20.4",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.18.2",
     "libraryName": "pnp-react-hooks-examples",
-    "libraryId": "c7f4f772-6556-4b9f-8086-b3c62b22e0e1",
+    "libraryId": "4928699d-c940-41d0-91a7-21f1585b3833",
+    "environment": "spo",
     "packageManager": "npm",
+    "solutionName": "pnp-react-hooks-examples",
+    "solutionShortDescription": "pnp-react-hooks-examples description",
+    "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "componentType": "webpart"
   }
